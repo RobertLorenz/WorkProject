@@ -27,6 +27,17 @@ function App() {
     })
   }
 
+  const getInput = (event) => {
+    Axios.get("http://www.boredapi.com/api/activity?key="+ event.target.value).then(response =>{
+      if(response.data.key === undefined){
+        setActivity("No activites with given key");
+      } else {
+      //console.log(event);
+      setActivity("Activity: "   + response.data.activity +  ", Type: "  + response.data.type  + ", Participants: " + response.data.participants);
+      }
+    })
+  }
+
 
 
   const getActivities = () => {
