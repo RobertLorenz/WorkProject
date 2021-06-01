@@ -1,26 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function App() {
+
+
+function Party() {
 
   const [activity, setActivity] = useState("");
+  const [input,setInput] = useState("");
+ 
 
-  const getParty = () => {
-    Axios.get("http://www.boredapi.com/api/activity/").then((response) => {
-      console.log(response);
+  const getInput = (event) => {
+    Axios.get("http://www.boredapi.com/api/activity?participants="+ event.target.value).then(response =>{
+      if(response.data.participants === undefined){
+        setActivity("No activites with given participants.");
+      } else {
+      //console.log(event);
       setActivity("Activity: "   + response.data.activity +  ", Type: "  + response.data.type  + ", Participants: " + response.data.participants);
-      
+      }
     })
   }
 
   return (
-    <div class="random">
-      <button onClick={getRandomActivity}>Get Activity</button><br></br>
+    <>
+    <div className="random">
       {activity}
     </div>
+    <br/> <form className="input">
+    <label>Activity Search By Participants</label><br/>
+      <input value={input} type="text" onChange={getInput}/>
+      <input value="Send" type="submit"/>
+    </form><br/> 
+    </>
   );
 }
 
-export default App;
+export default Party;

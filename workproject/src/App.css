@@ -14,7 +14,7 @@ div.random{
   top: 50%;
   left: 50%;
   margin-top: -150px;
-  margin-left: -150px;
+  margin-left: -125px;
   width: 200px;
   height: 200px;
   
@@ -34,3 +34,22 @@ button{
   overflow: hidden;
   z-index: 1;
 }
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float:center;
+}
+
+
+li {
+  background-color: rgb(14, 105, 224);
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
