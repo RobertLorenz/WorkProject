@@ -4,13 +4,12 @@ import React, { useState, useEffect } from "react";
 import ByKey from './ByKey';
 import Party from './Party';
 import NavBar from './NavBar';
+import Act from './Act';
 import { Route, Link } from 'react-router-dom';
 
 function App() {
 
   const [activity, setActivity] = useState("");
-  const [input,setInput] = useState("");
-  const [activities,setActivities] = useState("");
   const [key, setKey] = useState("");
 
   const getRandomActivity = () => {
@@ -19,51 +18,23 @@ function App() {
     })
   }
 
- /* const getInput = (event) => {
-    Axios.get("http://www.boredapi.com/api/activity?participants="+ event.target.value).then(response =>{
-      if(response.data.participants === undefined){
-        setActivity("No activites with given participants.");
-      } else {
-      //console.log(event);
-      setActivity("Activity: "   + response.data.activity +  ", Type: "  + response.data.type  + ", Participants: " + response.data.participants);
-      }
-    })
-  }
-
-  const getKey = (event) => {
-    Axios.get("http://www.boredapi.com/api/activity?key="+ event.target.value).then(response =>{
-      if(response.data.key === undefined){
-        setActivity("No activites with given key.");
-      } else {
-      //console.log(event);
-      setActivity("Activity: "   + response.data.activity +  ", Type: "  + response.data.type  + ", Participants: " + response.data.participants);
-      }
-    })
-  }
-
-*/
-  const getActivities = () => {
-    Axios.get("http://www.boredapi.com/api/activity?minaccessibility=0&maxaccessibility=0.5").then(response =>{
-        setActivities("Activity: " + response.data.activity);
-    })
-  }
-
-
   useEffect(() => {
-    //console.log("asd");
     getRandomActivity();
   },[]);
 
-  useEffect(() => {
-    getActivities();
-  },[])
 
   return (
     <>
     <div>
       <NavBar />
-      <Route exact path="/ByKey" component={ByKey} />
-      <Route exact path="/Party" component={Party} />
+      <Route exact path="/ByKey" render={(props) => (
+    <ByKey setActivity={ (obj) => setActivity(obj)} key={key}/>
+    )} />
+
+    <Route exact path="/Party" render={(props) => (
+    <Party setActivity={ (obj) => setActivity(obj)} />
+    )} />
+    <Route exact path="/Act" component={Act} />
     </div>
     <div className="random">
       {activity}

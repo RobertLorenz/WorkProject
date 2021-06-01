@@ -6,6 +6,8 @@ function NavBar(){
         <ul>
             <li><Link to="/Party">Search by Participants</Link></li>
             <li><Link to="/ByKey">Search by Key</Link></li>
+            <li><Link to="/Act">Print 10 Activity</Link></li>
+
         </ul>
     )
 }

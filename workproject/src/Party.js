@@ -4,10 +4,9 @@ import React, { useState, useEffect } from "react";
 
 
 
-function Party() {
+function Party({ setActivity}) {
 
-  const [activity, setActivity] = useState("");
-  const [input,setInput] = useState("");
+  const [input, setInput] = useState(""); 
  
 
   const getInput = (event) => {
@@ -15,7 +14,6 @@ function Party() {
       if(response.data.participants === undefined){
         setActivity("No activites with given participants.");
       } else {
-      //console.log(event);
       setActivity("Activity: "   + response.data.activity +  ", Type: "  + response.data.type  + ", Participants: " + response.data.participants);
       }
     })
@@ -23,13 +21,9 @@ function Party() {
 
   return (
     <>
-    <div className="random">
-      {activity}
-    </div>
     <br/> <form className="input">
     <label>Activity Search By Participants</label><br/>
       <input value={input} type="text" onChange={getInput}/>
-      <input value="Send" type="submit"/>
     </form><br/> 
     </>
   );
